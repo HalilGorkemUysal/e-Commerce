@@ -1,159 +1,202 @@
-# 🛒 MultiShop – Mikroservis Tabanlı E-Ticaret Uygulaması
+# 🛒 MultiShop | ASP.NET Core Microservices E-Commerce
 
-MultiShop, ASP.NET Core 6.0 ile geliştirdiğim, mikroservis mimarisi üzerine kurulu bir e-ticaret projesidir. Amacım; tek parça (monolitik) bir uygulama yerine, her biri kendi işini yapan ve birbirinden bağımsız çalışabilen servislerden oluşan gerçekçi bir sistem kurmak ve bu süreçte modern backend pratiklerini uçtan uca uygulamaktı.
+## 📌 Proje Hakkında
 
-Projede kimlik doğrulama, API Gateway, mesaj kuyruğu, önbellekleme, gerçek zamanlı bildirimler ve container yönetimi gibi gerçek hayatta karşılaşılan birçok konu bir arada yer alıyor.
+**MultiShop**, ASP.NET Core 6.0 kullanılarak mikroservis mimarisiyle geliştirdiğim kapsamlı bir e-ticaret uygulamasıdır.
 
-> 📌 Bu proje, Murat Yücedağ'ın eğitmenliğindeki **"ASP.NET Core MultiShop Mikroservis E-Ticaret Kursu"** sürecinde geliştirilmiştir.
+Bu projede temel amacım, gerçek hayattaki e-ticaret sistemlerinin işleyişini mikroservis yaklaşımıyla ele almak, farklı teknolojilerin bir arada nasıl çalıştığını deneyimlemek ve yönetilebilir, modüler ve ölçeklenebilir bir yazılım altyapısı oluşturmaktı.
 
----
+Monolitik bir yapı yerine, farklı iş süreçlerini birbirinden bağımsız servisler üzerinden yöneten bir mimari tercih ettim. Ürün yönetimi, sipariş işlemleri, sepet yönetimi, kullanıcı işlemleri ve diğer e-ticaret fonksiyonlarını ayrı servisler üzerinden ele aldım.
 
-## 📑 İçindekiler
+Backend tarafında ASP.NET Core Web API teknolojisini kullanırken, kullanıcı arayüzü için ASP.NET Core MVC yapısından yararlandım. Veri yönetimi, kimlik doğrulama, servisler arası iletişim ve asenkron işlemler için farklı teknolojileri projeye entegre ettim.
 
-- [Proje Hakkında](#-proje-hakkında)
-- [Uygulama Bölümleri](#-uygulama-bölümleri)
-- [Mimari Yaklaşım](#-mimari-yaklaşım)
-- [Kullanılan Teknolojiler](#-kullanılan-teknolojiler)
-- [Kurulum](#-kurulum)
-- [Ekran Görüntüleri](#-ekran-görüntüleri)
-- [Neler Öğrendim](#-neler-öğrendim)
-- [İletişim](#-iletişim)
+Proje, **Murat Yücedağ** tarafından verilen *ASP.NET Core MultiShop Mikroservis E-Ticaret* eğitimi kapsamında geliştirilmiştir.
 
 ---
 
-## 💡 Proje Hakkında
+## 🚀 Kullanılan Teknolojiler
 
-MultiShop'ta alışveriş akışının tamamı mikroservisler üzerinden yürüyor: ürünler, sepet, sipariş, indirim, yorum, mesajlaşma ve kullanıcı yönetimi ayrı servisler olarak tasarlandı. Servisler dışarıya **Ocelot API Gateway** üzerinden açılıyor, yetkilendirme ise **IdentityServer** ile yönetiliyor.
+Projeyi geliştirirken farklı ihtiyaçlara yönelik çeşitli teknolojilerden ve yazılım geliştirme yaklaşımlarından yararlandım.
 
-Her servisin ihtiyacına göre farklı bir veritabanı tercih ettim (MongoDB, MSSQL, PostgreSQL). Sepet gibi hızlı erişim gereken veriler ise Redis üzerinde tutuluyor.
+### 💻 Backend ve Mimari
+
+- **ASP.NET Core 6.0 (MVC & Web API):** Backend servislerinin ve web uygulamasının geliştirilmesi
+- **Microservices Architecture:** İş süreçlerinin bağımsız servisler üzerinden yönetilmesi
+- **RESTful API:** Servisler arasında HTTP tabanlı iletişim kurulması
+- **Ocelot API Gateway:** API isteklerinin merkezi bir noktadan ilgili servislere yönlendirilmesi
+- **Onion Architecture:** Katmanlı, sürdürülebilir ve bağımlılıkları kontrol altında tutan mimari yapı
+- **CQRS & MediatR:** Komut ve sorgu işlemlerinin birbirinden ayrılması
+- **Repository Pattern:** Veri erişim işlemlerinin soyutlanması
+- **DTO & AutoMapper:** Katmanlar arasında veri aktarımı ve nesne eşleme işlemleri
+- **API Consume:** Backend servislerinden alınan verilerin MVC arayüzünde kullanılması
+
+### 🗄️ Veritabanı ve Önbellekleme
+
+- **Microsoft SQL Server:** İlişkisel verilerin yönetimi
+- **PostgreSQL:** İlişkisel veritabanı işlemleri
+- **MongoDB:** NoSQL tabanlı veri yönetimi
+- **Redis:** Sepet verilerinin saklanması ve önbellekleme işlemleri
+
+### 🔐 Güvenlik ve Kimlik Yönetimi
+
+- **IdentityServer:** Merkezi kimlik yönetimi
+- **JWT (JSON Web Token):** Token tabanlı kimlik doğrulama
+- **OAuth 2.0:** Yetkilendirme süreçleri ve güvenli erişim
+
+### 🔄 Mesajlaşma ve Gerçek Zamanlı İşlemler
+
+- **RabbitMQ:** Servisler arasında asenkron mesajlaşma
+- **SignalR:** Gerçek zamanlı bildirimler ve canlı veri aktarımı
+
+### 🐳 DevOps ve Bulut Teknolojileri
+
+- **Docker:** Mikroservislerin container ortamında çalıştırılması
+- **Google Cloud Storage:** Ürün görselleri ve dosyaların bulut ortamında yönetilmesi
+
+### 🎨 Frontend
+
+- **HTML5**
+- **CSS3**
+- **Bootstrap**
+- **JavaScript**
+- **Razor Views**
+- **ViewComponent & PartialView**
+
+### 🧪 API Test ve Dokümantasyon
+
+- **Swagger:** API endpoint'lerinin dokümantasyonu ve test edilmesi
+- **Postman:** API isteklerinin ve servis yanıtlarının test edilmesi
 
 ---
 
-## 🧩 Uygulama Bölümleri
+## 🏗️ Proje Mimarisi
 
-### 🖥️ Kullanıcı Arayüzü (Vitrin)
-Ziyaretçilerin ve müşterilerin kullandığı ana alışveriş bölümü:
-- Ürün listeleme ve kategoriye göre filtreleme
-- Ürün detay sayfaları
-- Sepete ekleme ve ödeme adımları
-- Kampanya ve indirim alanları
-- Döviz kuru ve hava durumu entegrasyonları
+MultiShop uygulamasını geliştirirken mikroservis mimarisinin sunduğu modülerlik ve bağımsız servis yönetimi yaklaşımını temel aldım.
 
-### 🛠️ Admin Paneli
-Yönetici rolündeki kullanıcıların siteyi yönettiği bölüm:
-- Ürün, kategori, marka, kampanya ve slider için tam CRUD işlemleri
+Her mikroservis belirli bir iş alanından sorumludur. Böylece uygulamanın farklı bölümleri birbirinden bağımsız olarak geliştirilebilir ve yönetilebilir.
+
+**Mimarinin temel bileşenleri:**
+
+- **API Gateway:** İstemcilerden gelen isteklerin ilgili servislere yönlendirilmesi
+- **Identity Service:** Kimlik doğrulama ve yetkilendirme işlemleri
+- **Catalog Service:** Ürün, kategori ve ürün detaylarının yönetimi
+- **Basket Service:** Kullanıcı sepetlerinin Redis üzerinden yönetilmesi
+- **Order Service:** Sipariş oluşturma ve sipariş süreçlerinin yönetimi
+- **Discount Service:** İndirim ve kampanya işlemleri
+- **Message Service:** Kullanıcı mesajlaşma işlemleri
+- **Diğer Servisler:** Uygulamanın farklı iş ihtiyaçlarına yönelik bağımsız servisler
+
+Bu mimariyle servisler arasındaki bağımlılıkları azaltmayı, kodun bakımını kolaylaştırmayı ve farklı veri depolama teknolojilerini aynı sistem içinde kullanmayı hedefledim.
+
+---
+
+## 🖥️ Uygulama Modülleri
+
+MultiShop üç temel arayüzden oluşmaktadır.
+
+### 🛍️ 1. E-Ticaret Web Sitesi
+
+Kullanıcıların ürünleri inceleyebildiği, alışveriş yapabildiği ve sipariş süreçlerini gerçekleştirebildiği ana uygulama bölümüdür.
+
+**Başlıca özellikler:**
+
+- Ürünlerin listelenmesi ve detaylarının görüntülenmesi
+- Kategorilere göre ürün filtreleme
+- Ürünlerin alışveriş sepetine eklenmesi
+- Sepet içeriğinin güncellenmesi ve yönetilmesi
+- Sipariş ve ödeme süreçleri
+- Kampanya ve indirimlerin görüntülenmesi
+- Döviz kuru bilgilerinin entegrasyonu
+- Hava durumu verilerinin gösterilmesi
+- Responsive ve kullanıcı dostu arayüz
+
+### 🛠️ 2. Yönetici (Admin) Paneli
+
+Sistemdeki içeriklerin ve operasyonel işlemlerin yönetilmesi için geliştirdiğim yönetim arayüzüdür.
+
+Yetkili kullanıcılar bu panel aracılığıyla uygulamanın farklı bölümlerinde CRUD (Create, Read, Update, Delete) işlemleri gerçekleştirebilir.
+
+**Başlıca özellikler:**
+
+- Ürün yönetimi
+- Kategori yönetimi
+- Marka yönetimi
+- Kampanya ve indirim yönetimi
+- Slider ve vitrin içeriklerinin yönetimi
 - Kullanıcı yönetimi
-- SignalR ile canlı güncellenen istatistikler
+- İstatistiksel verilerin görüntülenmesi
+- Dinamik içerik yönetimi
 
-### 👤 Kullanıcı Paneli
-Kayıtlı müşterilerin kendi hesaplarını yönettiği alan:
-- Profil bilgilerini görüntüleme ve düzenleme
-- Geçmiş siparişleri takip etme
-- Gelen ve giden mesajları yönetme
+### 👤 3. Kullanıcı Paneli
 
----
+Sisteme kayıtlı kullanıcıların kişisel bilgilerini ve e-ticaret işlemlerini takip edebildiği bölümdür.
 
-## 🏗️ Mimari Yaklaşım
+**Başlıca özellikler:**
 
-- **Mikroservis mimarisi:** Servisler bağımsız geliştirilir, dağıtılır ve ölçeklenir.
-- **Onion Architecture:** Katmanlar arası bağımlılıklar kontrol altında tutulur, kod modüler kalır.
-- **CQRS + MediatR:** Okuma ve yazma işlemleri birbirinden ayrılır.
-- **Repository Pattern:** Veri erişim katmanı soyutlanır, tekrar kullanılabilirlik artar.
-- **Event-driven iletişim:** Servisler arası asenkron haberleşme RabbitMQ ile sağlanır.
-- **API Gateway:** Tüm istekler Ocelot üzerinden merkezi olarak yönlendirilir.
+- Kullanıcı profil bilgilerinin görüntülenmesi
+- Profil bilgilerinin güncellenmesi
+- Geçmiş siparişlerin listelenmesi
+- Sipariş detaylarının incelenmesi
+- Gelen mesajların görüntülenmesi
+- Gönderilen mesajların takip edilmesi
+- Kullanıcıya özel işlemlerin yönetilmesi
 
 ---
 
-## 🧰 Kullanılan Teknolojiler
+## ⚙️ Teknik Yaklaşım
 
-| Kategori | Teknolojiler |
-|---|---|
-| **Backend** | ASP.NET Core 6.0 (MVC & Web API), C# |
-| **Mimari & Desenler** | Microservices, Onion Architecture, CQRS, MediatR, Repository Pattern |
-| **API Gateway** | Ocelot |
-| **Kimlik & Güvenlik** | IdentityServer, JWT, OAuth 2.0 |
-| **Veritabanları** | MongoDB, MSSQL, PostgreSQL |
-| **Önbellek** | Redis (sepet ve cache yönetimi) |
-| **Mesajlaşma** | RabbitMQ |
-| **Gerçek Zamanlı İletişim** | SignalR |
-| **Nesne Eşleme** | DTO, AutoMapper |
-| **Container** | Docker |
-| **Depolama** | Google Cloud Storage (ürün görselleri) |
-| **API Test & Dokümantasyon** | Swagger, Postman |
-| **Frontend** | HTML5, CSS3, Bootstrap, JavaScript, ViewComponent, PartialView |
+### 🔹 Mikroservisler Arası İletişim
 
----
+Servisler arasındaki iletişim için RESTful API yaklaşımını kullandım. API Gateway tarafında Ocelot ile merkezi yönlendirme yapısı oluşturdum.
 
-## 🚀 Kurulum
+Asenkron işlem gerektiren senaryolarda RabbitMQ kullanarak mesaj tabanlı iletişim yaklaşımını uyguladım.
 
-> Aşağıdaki adımlar genel bir akıştır. Klasör ve dosya adlarını kendi proje yapına göre düzenle.
+### 🔹 Veri Yönetimi
 
-### Gereksinimler
-- [.NET 6.0 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
-- [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- Visual Studio 2022 veya VS Code
+Projedeki servislerin ihtiyaçlarına göre MongoDB, MSSQL ve PostgreSQL veritabanlarından yararlandım.
 
-### Adımlar
+Redis teknolojisini özellikle sepet yönetimi ve önbellekleme senaryolarında kullandım.
 
-1. Projeyi klonla:
-   ```bash
-   git clone https://github.com/KULLANICI_ADIN/PROJE_ADIN.git
-   cd PROJE_ADIN
-   ```
+CQRS, MediatR ve Repository Pattern gibi yaklaşımlarla veri erişim ve iş mantığı süreçlerini daha düzenli hale getirdim.
 
-2. Gerekli altyapı servislerini (MongoDB, PostgreSQL, MSSQL, Redis, RabbitMQ) Docker ile ayağa kaldır:
-   ```bash
-   docker-compose up -d
-   ```
+### 🔹 Kimlik Doğrulama ve Yetkilendirme
 
-3. Her servisin `appsettings.json` dosyasındaki bağlantı bilgilerini kendi ortamına göre güncelle.
+IdentityServer, JWT ve OAuth 2.0 teknolojileriyle kullanıcı kimlik doğrulama ve yetkilendirme süreçleri üzerinde çalıştım.
 
-4. Veritabanı migration'larını uygula (Entity Framework kullanan servisler için):
-   ```bash
-   dotnet ef database update
-   ```
+Kullanıcı ve yönetici panelleri için rol bazlı erişim yaklaşımını uyguladım.
 
-5. Servisleri sırayla çalıştır:
-   - IdentityServer
-   - Mikroservisler (Catalog, Basket, Order, Discount, Comment, Message vb.)
-   - Ocelot API Gateway
-   - Web arayüzü
+### 🔹 Gerçek Zamanlı İşlemler
 
-6. Tarayıcıdan uygulamayı aç ve API'leri Swagger üzerinden test et.
+SignalR kullanarak gerçek zamanlı bildirimlerin ve canlı istatistiklerin uygulama arayüzüne aktarılmasını sağladım.
+
+### 🔹 Container Yönetimi
+
+Docker teknolojisinden yararlanarak mikroservislerin container tabanlı ortamlarda çalıştırılmasını ele aldım.
 
 ---
 
-## 🖼️ Ekran Görüntüleri
+## 📚 Proje Sürecinde Kazandığım Deneyimler
 
-<!-- Görsellerini bir /images klasörüne koyup aşağıdaki gibi ekleyebilirsin -->
+Bu projeyi geliştirirken yalnızca farklı teknolojileri kullanmakla kalmadım, aynı zamanda bu teknolojilerin birbirleriyle nasıl entegre edildiğini de deneyimledim.
 
-| Ana Sayfa | Admin Paneli | Kullanıcı Paneli |
-|---|---|---|
-| ![Ana Sayfa](images/home.png) | ![Admin](images/admin.png) | ![Kullanıcı](images/user.png) |
+Özellikle;
+
+- Mikroservis mimarisinin tasarlanması ve servis sorumluluklarının ayrılması
+- Farklı veritabanı sistemlerinin bir projede birlikte kullanılması
+- API Gateway üzerinden servis iletişiminin yönetilmesi
+- Kimlik doğrulama ve yetkilendirme mekanizmalarının uygulanması
+- RabbitMQ ile asenkron mesajlaşma süreçlerinin oluşturulması
+- Docker ile container tabanlı uygulama geliştirilmesi
+- Backend servislerinin MVC arayüzüyle entegre edilmesi
+- Gerçek bir e-ticaret sistemindeki iş süreçlerinin modellenmesi
+
+konularında uygulamalı çalışma fırsatı buldum.
+
+Bu proje, ASP.NET Core ekosisteminde mikroservis tabanlı uygulama geliştirme konusunda edindiğim bilgileri pekiştirmemi sağlayan kapsamlı bir çalışma oldu.
+
+---
+🙏 
 
 ---
 
-## 📚 Neler Öğrendim
-
-Bu proje boyunca şunları hem öğrenme hem uygulama fırsatı buldum:
-
-- Mikroservis mimarisinde servisleri doğru sınırlarla ayırmayı
-- API Gateway ile merkezi yönlendirme ve güvenlik yönetimini
-- IdentityServer, JWT ve OAuth 2.0 ile kimlik doğrulama/yetkilendirmeyi
-- Aynı sistemde birden fazla veritabanı teknolojisini bir arada kullanmayı
-- RabbitMQ ile asenkron, event-driven iletişim kurmayı
-- Redis ile performans odaklı veri saklamayı
-- Docker ile servisleri container olarak yönetmeyi
-- SignalR ile gerçek zamanlı özellikler geliştirmeyi
-
----
-
-## 📬 İletişim
-
-Görüşlerini, önerilerini veya sorularını paylaşmaktan çekinme.
-
-- 💼 LinkedIn: [linkedin.com/in/KULLANICI_ADIN](https://www.linkedin.com/in/KULLANICI_ADIN)
-- 🌐 Blog: [gorkemsblog.runasp.net](https://gorkemsblog.runasp.net/)
-- 🐙 GitHub: [github.com/KULLANICI_ADIN](https://github.com/KULLANICI_ADIN)
-
-⭐ Projeyi beğendiysen bir yıldız bırakmayı unutma!
+⭐ **Projeyi faydalı bulduysanız GitHub üzerinden yıldız vererek destek olabilirsiniz!**
