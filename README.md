@@ -193,7 +193,29 @@ Bu projeyi geliştirirken yalnızca farklı teknolojileri kullanmakla kalmadım,
 konularında uygulamalı çalışma fırsatı buldum.
 
 Bu proje, ASP.NET Core ekosisteminde mikroservis tabanlı uygulama geliştirme konusunda edindiğim bilgileri pekiştirmemi sağlayan kapsamlı bir çalışma oldu.
+## 📸 Proje Ekran Görüntüleri
 
+MultiShop e-ticaret uygulamasının farklı
+bölümlerinden ekran görüntüleri aşağıda
+yer almaktadır.
+
+### 🖥️ Görsel 1
+![MultiShop Görsel 1](images/1772732286011.jpg)
+
+### 🖥️ Görsel 2
+![MultiShop Görsel 2](images/1772732286408.jpg)
+
+### 🖥️ Görsel 3
+![MultiShop Görsel 3](images/1787058702152.jpg)
+
+### 🖥️ Görsel 4
+![MultiShop Görsel 4](images/1787058702729.jpg)
+
+### 🖥️ Görsel 5
+![MultiShop Görsel 5](images/1787588447252.jpg)
+
+### 🖥️ Görsel 6
+![MultiShop Görsel 6](images/1787656247152.jpg)
 ---
 🙏 
 
